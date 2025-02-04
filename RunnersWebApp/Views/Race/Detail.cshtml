@@ -6,56 +6,88 @@
 
     <!-- Main Image -->
     <div class="text-center">
-        <img src="@Model.Image" class="img-fluid rounded shadow" alt="Project Image">
+        <img src="@Model.Image" class="img-fluid rounded shadow-lg" alt="Project Image">
     </div>
 
-    <!-- Project Description -->
-    <div class="mt-4">
-        <h2>Description</h2>
-        <p>@Model.Description</p>
+    <!-- Project Info (Side-by-Side Layout) -->
+    <div class="row mt-5">
+        <!-- Project Description -->
+        <div class="col-md-6">
+            <h2>Description</h2>
+            <p>@Model.Description</p>
+        </div>
+
+        <!-- Project Details -->
+        <div class="col-md-6">
+            <h2>Details</h2>
+            <table class="table table-bordered">
+                <tr>
+                    <th>City</th>
+                    <td>@Model.Address.City</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>@Model.Address.State</td>
+                </tr>
+                <tr>
+                    <th>Street</th>
+                    <td>@Model.Address.Street</td>
+                </tr>
+                <tr>
+                    <th>Race Category</th>
+                    <td>@Model.RaceCategory</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <!-- Project Details -->
-    <div class="mt-4">
-        <h2>Details</h2>
-        <ul class="list-group">
-            <li class="list-group-item"><strong>City: </strong>@Model.Address.City</li>
-            <li class="list-group-item"><strong>State: </strong>@Model.Address.State</li>
-            <li class="list-group-item"><strong>Street: </strong>@Model.Address.Street</li>
-            <li class="list-group-item"><strong>Race Category: </strong>@Model.RaceCategory</li>
-        </ul>
-    </div>
-
-    <!-- Related Projects -->
+    <!-- Related Projects (Horizontal Cards) -->
     <div class="mt-5">
-        <h2>Other Clubs</h2>
+        <h2 class="text-center">Similar Projects</h2>
         <div class="row mt-3">
-            <div class="col-md-4">
-                <div class="card shadow">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Project One</h5>
-                        <a href="#" class="btn btn-primary">View Project</a>
+            <div class="col-md-12">
+                <div class="card mb-3 shadow-lg">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/300" class="img-fluid rounded-start" alt="Related Project 1">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Project Alpha</h5>
+                                <p class="card-text">An innovative project focusing on cutting-edge technology.</p>
+                                <a href="#" class="btn btn-primary">View More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card shadow">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 2">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Project Two</h5>
-                        <a href="#" class="btn btn-primary">View Project</a>
+                <div class="card mb-3 shadow-lg">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/300" class="img-fluid rounded-start" alt="Related Project 2">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Project Beta</h5>
+                                <p class="card-text">A web solution designed for efficiency and scalability.</p>
+                                <a href="#" class="btn btn-primary">View More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card shadow">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Project Three</h5>
-                        <a href="#" class="btn btn-primary">View Project</a>
+                <div class="card mb-3 shadow-lg">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/300" class="img-fluid rounded-start" alt="Related Project 3">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Project Gamma</h5>
+                                <p class="card-text">A unique concept bringing innovation to digital platforms.</p>
+                                <a href="#" class="btn btn-primary">View More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
