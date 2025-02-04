@@ -1,0 +1,64 @@
+﻿@model Club
+
+<div class="container mt-5">
+    <!-- Title -->
+    <h1 class="text-center mb-4">@Model.Title</h1>
+
+    <!-- Main Image -->
+    <div class="text-center">
+        <img src="@Model.Image" class="img-fluid rounded shadow" alt="Project Image">
+    </div>
+
+    <!-- Project Description -->
+    <div class="mt-4">
+        <h2>Description</h2>
+        <p>@Model.Description</p>
+    </div>
+
+    <!-- Project Details -->
+    <div class="mt-4">
+        <h2>Details</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>City: </strong>@Model.Address.City</li>
+            <li class="list-group-item"><strong>State: </strong>@Model.Address.State</li>
+            <li class="list-group-item"><strong>Street: </strong>@Model.Address.Street</li>
+            <li class="list-group-item"><strong>Club Category: </strong>@Model.ClubCategory</li>
+        </ul>
+    </div>
+
+    <!-- Related Projects -->
+    <div class="mt-5">
+        <h2>Other Clubs</h2>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Project One</h5>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 2">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Project Two</h5>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Project Three</h5>
+                        <a href="#" class="btn btn-primary">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
