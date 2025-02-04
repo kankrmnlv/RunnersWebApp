@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
 using RunnersWebApp.Data;
+using RunnersWebApp.Interfaces;
+using RunnersWebApp.Repository;
 
 namespace RunnersWebApp
 {
@@ -12,6 +14,8 @@ namespace RunnersWebApp
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IClubInterface, ClubRepository>();
+            builder.Services.AddScoped<IRaceInterface, RaceRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
