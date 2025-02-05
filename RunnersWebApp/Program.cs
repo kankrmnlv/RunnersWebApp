@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using RunGroopWebApp.Data;
 using RunnersWebApp.Data;
+using RunnersWebApp.Helpers;
 using RunnersWebApp.Interfaces;
 using RunnersWebApp.Repository;
+using RunnersWebApp.Services;
 
 namespace RunnersWebApp
 {
@@ -16,6 +18,8 @@ namespace RunnersWebApp
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<IClubInterface, ClubRepository>();
             builder.Services.AddScoped<IRaceInterface, RaceRepository>();
+            builder.Services.AddScoped<IPhotoInterface, PhotoService>();
+            builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
