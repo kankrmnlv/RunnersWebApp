@@ -62,5 +62,60 @@ namespace RunnersWebApp.Controllers
 
             return View(clubVM);
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var club = await _clubInterface.GetByIdAsync(id);
+            if(club == null) return View("Error");
+            var clubVM = new EditClubViewModel
+            {
+                Title = club.Title,
+                Description = club.Description,
+                AddressId = club.AddressId,
+                Address = club.Address,
+                URL = club.Image,
+                ClubCategory = club.ClubCategory
+            };
+            return View(clubVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditClubViewModel clubVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit club");
+                return View("Edit", clubVM);
+            }
+
+            var userClub = await _clubInterface.GetByIdAsyncNoTracking(id);
+            if(userClub!= null)
+            {
+                try
+                {
+                    await _photoInterface.DeletePhotoAsync(userClub.Image);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Could not delete photo");
+                    return View(clubVM);
+                }
+                var photoResult = await _photoInterface.AddPhotoAsync(clubVM.Image);
+                var club = new Club
+                {
+                    Id = id,
+                    Title = clubVM.Title,
+                    Description = clubVM.Description,
+                    Image = photoResult.Url.ToString(),
+                    AddressId = clubVM.AddressId,
+                    Address = clubVM.Address
+                };
+                _clubInterface.Update(club);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(clubVM);
+            }
+        }
     }
 }

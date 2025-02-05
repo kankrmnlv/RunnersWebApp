@@ -63,5 +63,61 @@ namespace RunnersWebApp.Controllers
 
             return View(raceVM);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var race = await _raceInterface.GetByIdAsync(id);
+            if (race == null) return View("Error");
+            var raceVM = new EditRaceViewModel
+            {
+                Title = race.Title,
+                Description = race.Description,
+                AddressId = race.AddressId,
+                Address = race.Address,
+                URL = race.Image,
+                RaceCategory = race.RaceCategory
+            };
+            return View(raceVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditRaceViewModel raceVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Failed to edit race");
+                return View("Edit", raceVM);
+            }
+
+            var userClub = await _raceInterface.GetByIdAsyncNoTracking(id);
+            if (userClub != null)
+            {
+                try
+                {
+                    await _photoInterface.DeletePhotoAsync(userClub.Image);
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Could not delete photo");
+                    return View(raceVM);
+                }
+                var photoResult = await _photoInterface.AddPhotoAsync(raceVM.Image);
+                var race = new Race
+                {
+                    Id = id,
+                    Title = raceVM.Title,
+                    Description = raceVM.Description,
+                    Image = photoResult.Url.ToString(),
+                    AddressId = raceVM.AddressId,
+                    Address = raceVM.Address
+                };
+                _raceInterface.Update(race);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(raceVM);
+            }
+        }
     }
 }
