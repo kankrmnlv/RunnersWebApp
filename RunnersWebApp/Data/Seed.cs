@@ -29,7 +29,7 @@ namespace RunGroopWebApp.Data
                             {
                                 Street = "123 Main St",
                                 City = "Charlotte",
-                                State = "NC"
+                                Country = "NC"
                             }
                          },
                         new Club()
@@ -42,7 +42,7 @@ namespace RunGroopWebApp.Data
                             {
                                 Street = "123 Main St",
                                 City = "Charlotte",
-                                State = "NC"
+                                Country = "NC"
                             }
                         },
                         new Club()
@@ -55,7 +55,7 @@ namespace RunGroopWebApp.Data
                             {
                                 Street = "123 Main St",
                                 City = "Charlotte",
-                                State = "NC"
+                                Country = "NC"
                             }
                         },
                         new Club()
@@ -68,7 +68,7 @@ namespace RunGroopWebApp.Data
                             {
                                 Street = "123 Main St",
                                 City = "Michigan",
-                                State = "NC"
+                                Country = "NC"
                             }
                         }
                     });
@@ -89,7 +89,7 @@ namespace RunGroopWebApp.Data
                             {
                                 Street = "123 Main St",
                                 City = "Charlotte",
-                                State = "NC"
+                                Country = "NC"
                             }
                         },
                         new Race()
@@ -103,7 +103,7 @@ namespace RunGroopWebApp.Data
                             {
                                 Street = "123 Main St",
                                 City = "Charlotte",
-                                State = "NC"
+                                Country = "NC"
                             }
                         }
                     });

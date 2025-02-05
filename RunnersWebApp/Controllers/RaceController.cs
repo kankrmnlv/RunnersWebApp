@@ -49,7 +49,7 @@ namespace RunnersWebApp.Controllers
                     {
                         Street = raceVM.Address.Street,
                         City = raceVM.Address.City,
-                        State = raceVM.Address.State,
+                        Country = raceVM.Address.Country,
                     }
                 };
 

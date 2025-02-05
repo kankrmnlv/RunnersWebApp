@@ -48,7 +48,7 @@ namespace RunnersWebApp.Controllers
                     {
                         Street = clubVM.Address.Street,
                         City = clubVM.Address.City,
-                        State = clubVM.Address.State
+                        Country = clubVM.Address.Country
                     }
                 };
 
