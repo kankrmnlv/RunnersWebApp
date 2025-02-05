@@ -25,5 +25,21 @@ namespace RunnersWebApp.Controllers
             Race race = await _raceInterface.GetByIdAsync(id);
             return View(race);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Race race)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(race);
+            }
+            _raceInterface.Add(race);
+            return RedirectToAction("Index");
+        }
     }
 }
