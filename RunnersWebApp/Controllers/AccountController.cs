@@ -90,14 +90,14 @@ namespace RunnersWebApp.Controllers
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
             }
 
-            return View("Home");
+            return RedirectToAction("Index", "Race");
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Race");
         }
     }
 }
