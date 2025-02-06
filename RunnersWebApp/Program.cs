@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using RunGroopWebApp.Data;
 using RunnersWebApp.Data;
 using RunnersWebApp.Helpers;
 using RunnersWebApp.Interfaces;
+using RunnersWebApp.Models;
 using RunnersWebApp.Repository;
 using RunnersWebApp.Services;
 
@@ -10,7 +12,7 @@ namespace RunnersWebApp
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -24,12 +26,17 @@ namespace RunnersWebApp
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             var app = builder.Build();
 
             if(args.Length == 1 && args[0].ToLower() == "seeddata")
             {
-                Seed.SeedData(app);
+                await Seed.SeedUsersAndRolesAsync(app);
+                //Seed.SeedData(app);
             }
 
             // Configure the HTTP request pipeline.
