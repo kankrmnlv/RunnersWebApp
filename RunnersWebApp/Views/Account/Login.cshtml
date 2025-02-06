@@ -1,0 +1,42 @@
+﻿@using RunnersWebApp.ViewModels
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container d-flex justify-content-center align-items-start vh-100 pt-5">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+        <h2 class="text-center mb-4">Login</h2>
+        @if(TempData["Error"] != null){
+            <div class="col-md-12 alert alert-danger">
+                <span>@TempData["Error"]</span>
+            </div>
+        }
+
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Email -->
+            <div class="mb-3">
+                <label asp-for="EmailAddress" class="form-label">Email</label>
+                <input asp-for="EmailAddress" class="form-control" required placeholder="Enter your email">
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-control" required placeholder="Enter your password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Login Button -->
+            <input class="btn btn-primary w-100" type="submit" value="Login"/>
+        </form>
+
+        <!-- Register Link -->
+        <p class="text-center mt-3">
+            Don't have an account? <a href="#" class="text-decoration-none">Register</a>
+        </p>
+    </div>
+</div>
+
