@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RunnersWebApp.Data.Enum;
-using RunnersWebApp.Data;
 using RunnersWebApp.Models;
 
 namespace RunnersWebApp.Data
