@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using RunnersWebApp.ViewModels
+@inject SignInManager<AppUser> SignInManager
+
+@model DashboardViewModel
+
+<div class="container py-4">
+    <!-- Header Section -->
+    <div class="bg-primary text-white p-4 rounded text-center">
+        <h1 class="display-4 fw-normal">User Dashboard</h1>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex flex-wrap justify-content-start gap-3 mt-3">
+        <a class="btn btn-outline-primary" asp-controller="Club" asp-action="Create">+ Create Club</a>
+        <a class="btn btn-outline-primary" asp-controller="Race" asp-action="Create">+ Create Race</a>
+        <a class="btn btn-outline-secondary" asp-controller="Dashboard" asp-action="EditUserProfile">✏️ Edit Profile</a>
+    </div>
+
+    <!-- Your Races Section -->
+    <h2 class="mt-5">Your Races</h2>
+    <div class="row g-3">
+        @foreach (var item in Model.Races)
+        {
+            <div class="col-md-12">
+                <div class="d-flex border rounded p-3">
+                    <img src="@item.Image" alt="@item.Title" class="rounded me-3" style="width: 150px; height: 100px; object-fit: cover;">
+                    <div class="flex-grow-1">
+                        <h5>@item.Title</h5>
+                        <p class="mb-1 text-muted">@item.Description</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-primary" asp-controller="Race" asp-action="Detail" asp-route-id="@item.Id">View</a>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a class="btn btn-sm btn-outline-warning" asp-controller="Race" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn btn-sm btn-outline-danger" asp-controller="Race" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                }
+                            </div>
+                            <span class="badge bg-info">@item.RaceCategory</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Your Clubs Section -->
+    <h2 class="mt-5">Your Clubs</h2>
+    <div class="row g-3">
+        @foreach (var item in Model.Clubs)
+        {
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <img class="card-img-top" src="@item.Image" alt="@item.Title" style="height: 180px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">@item.Description</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-primary" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">View</a>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <a class="btn btn-sm btn-outline-warning" asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn btn-sm btn-outline-danger" asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                }
+                            </div>
+                            <span class="badge bg-success">@item.ClubCategory</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IClubInterface, ClubRepository>();
 builder.Services.AddScoped<IRaceInterface, RaceRepository>();
+builder.Services.AddScoped<IUserInterface, DashboardRepository>();
 builder.Services.AddScoped<IPhotoInterface, PhotoService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -46,6 +47,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

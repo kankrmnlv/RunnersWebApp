@@ -11,10 +11,12 @@ namespace RunnersWebApp.Controllers
     {
         private readonly IRaceInterface _raceInterface;
         private readonly IPhotoInterface _photoInterface;
-        public RaceController(IRaceInterface raceInterface, IPhotoInterface photoInterface)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public RaceController(IRaceInterface raceInterface, IPhotoInterface photoInterface, IHttpContextAccessor contextAccessor)
         {
             _raceInterface = raceInterface;
             _photoInterface = photoInterface;
+            _contextAccessor = contextAccessor;
         }
         public async Task<IActionResult> Index()
         {
@@ -31,7 +33,12 @@ namespace RunnersWebApp.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var currentUserId = _contextAccessor.HttpContext?.User.GetUserId();
+            var createRaceViewModel = new CreateRaceViewModel
+            {
+                AppUserId = currentUserId,
+            };
+            return View(createRaceViewModel);
         }
 
         [HttpPost]
@@ -45,6 +52,7 @@ namespace RunnersWebApp.Controllers
                     Title = raceVM.Title,
                     Description = raceVM.Description,
                     Image = result.Url.ToString(),
+                    AppUserId = raceVM.AppUserId,
                     Address = new Address
                     {
                         Street = raceVM.Address.Street,

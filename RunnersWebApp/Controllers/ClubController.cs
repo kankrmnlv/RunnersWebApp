@@ -11,10 +11,12 @@ namespace RunnersWebApp.Controllers
     {
         private readonly IClubInterface _clubInterface;
         private readonly IPhotoInterface _photoInterface;
-        public ClubController(IClubInterface clubInterface, IPhotoInterface photoInterface)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public ClubController(IClubInterface clubInterface, IPhotoInterface photoInterface, IHttpContextAccessor contextAccessor)
         {
             _clubInterface = clubInterface;
             _photoInterface = photoInterface;
+            _contextAccessor = contextAccessor;
         }
         public async Task<IActionResult> Index()
         {
@@ -29,7 +31,12 @@ namespace RunnersWebApp.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var currentUserId = _contextAccessor.HttpContext?.User.GetUserId();
+            var createClubViewModel = new CreateClubViewModel
+            {
+                AppUserId = currentUserId,
+            };
+            return View(createClubViewModel);
         }
 
         [HttpPost]
@@ -44,6 +51,7 @@ namespace RunnersWebApp.Controllers
                     Title = clubVM.Title,
                     Description = clubVM.Description,
                     Image = result.Url.ToString(),
+                    AppUserId = clubVM.AppUserId,
                     Address = new Address
                     {
                         Street = clubVM.Address.Street,
