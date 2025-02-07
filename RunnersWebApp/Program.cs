@@ -15,6 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IClubInterface, ClubRepository>();
 builder.Services.AddScoped<IRaceInterface, RaceRepository>();
 builder.Services.AddScoped<IUserInterface, DashboardRepository>();
+builder.Services.AddScoped<IRunnersInterface, RunnersRepository>();
 builder.Services.AddScoped<IPhotoInterface, PhotoService>();
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
