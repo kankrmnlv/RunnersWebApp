@@ -28,5 +28,9 @@ namespace RunnersWebApp.Repository
             var userRaces = _context.Races.Where(r => r.AppUser.Id == currentUser);
             return userRaces.ToList();
         }
+        public async Task<AppUser> GetUserById(string id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
     }
 }
