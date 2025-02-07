@@ -1,1 +1,46 @@
-﻿<h1>EDITITNG</h1>
+﻿@using RunnersWebApp.ViewModels
+@model EditUserProfileViewModel
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 p-4">
+                    <h3 class="text-center mb-4">Edit Profile</h3>
+
+                    <form asp-action="EditUserProfile" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="Id" name="Id" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Image">Profile picture</label>
+                            <input asp-for="Image" type="file" class="form-control" placeholder="Image" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Pace (mph)</label>
+                            <input type="number" step="0.1" class="form-control" asp-for="Pace">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Mileage (miles)</label>
+                            <input type="number" step="0.1" class="form-control" asp-for="Mileage">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" asp-for="City">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <input type="text" class="form-control" asp-for="Country">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

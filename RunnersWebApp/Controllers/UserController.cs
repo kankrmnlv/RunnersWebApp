@@ -22,6 +22,7 @@ namespace RunnersWebApp.Controllers
                 {
                     Id = user.Id,
                     UserName = user.UserName,
+                    Image = user.ProfilePictureUrl,
                     Pace = user.Pace,
                     Mileage = user.Mileage
                 };
