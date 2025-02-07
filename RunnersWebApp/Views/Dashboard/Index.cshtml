@@ -31,7 +31,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-sm btn-outline-primary" asp-controller="Race" asp-action="Detail" asp-route-id="@item.Id">View</a>
-                                @if (SignInManager.IsSignedIn(User))
+                                @if (User.Identity.IsAuthenticated)
                                 {
                                     <a class="btn btn-sm btn-outline-warning" asp-controller="Race" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                     <a class="btn btn-sm btn-outline-danger" asp-controller="Race" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -59,7 +59,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-sm btn-outline-primary" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">View</a>
-                                @if (SignInManager.IsSignedIn(User))
+                                @if (User.Identity.IsAuthenticated)
                                 {
                                     <a class="btn btn-sm btn-outline-warning" asp-controller="Club" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                     <a class="btn btn-sm btn-outline-danger" asp-controller="Club" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
