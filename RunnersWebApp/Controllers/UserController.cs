@@ -29,5 +29,19 @@ namespace RunnersWebApp.Controllers
             }
             return View(result);
         }
+
+        public async Task<IActionResult> Detail(string id)
+        {
+            var user = await _runnersInterface.GetUserById(id);
+            var runnersDetailViewModel = new RunnersDetailViewModel
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Pace = user.Pace,
+                Mileage = user.Mileage
+            };
+
+            return View(runnersDetailViewModel);
+        }
     }
 }
