@@ -1,1 +1,37 @@
-﻿<h1>DETAIL PAGE KANI AHAHAHA</h1>
+﻿@using RunnersWebApp.ViewModels
+@model RunnersDetailViewModel
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header text-center bg-primary text-white">
+                    <h2>@Model.UserName's Profile</h2>
+                </div>
+                <div class="card-body text-center">
+                    <img src="@Model.Image" class="rounded-circle mb-3" width="150" height="150" alt="Profile Picture">
+                    <h4 class="fw-bold">@Model.UserName</h4>
+                    <p class="text-muted">@Model.City, @Model.Country</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold">Pace</h5>
+                            <p class="text-muted">@Model.Pace mph</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-semibold">Mileage</h5>
+                            <p class="text-muted">@Model.Mileage miles</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center bg-light">
+                    <a asp-controller="User" asp-action="Index" class="btn btn-secondary">Back to Users</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

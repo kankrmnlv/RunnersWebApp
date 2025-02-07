@@ -39,7 +39,10 @@ namespace RunnersWebApp.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Pace = user.Pace,
-                Mileage = user.Mileage
+                Mileage = user.Mileage,
+                Image = user.ProfilePictureUrl,
+                Country = user.Country,
+                City = user.City
             };
 
             return View(runnersDetailViewModel);
