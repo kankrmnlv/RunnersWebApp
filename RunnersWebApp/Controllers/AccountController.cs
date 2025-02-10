@@ -44,15 +44,15 @@ namespace RunnersWebApp.Controllers
                     var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Race");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                 }
                 //Password incorrect
-                TempData["Error"] = "Wrong credentials. Please try again";
+                TempData["Error"] = "Wrong password. Please try again";
                 return View(loginViewModel);
             }
             //User not found
-            TempData["Error"] = "Wrong credentials. Please try again";
+            TempData["Error"] = "There is no such user. Please try again";
             return View(loginViewModel);
         }
 
@@ -89,15 +89,23 @@ namespace RunnersWebApp.Controllers
             {
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
             }
+            else
+            {
+                foreach (var error in newUserResponse.Errors)
+                {
+                    TempData["Error"] += error.Description + " ";
+                }
+                return View(registerViewModel);
+            }
 
-            return RedirectToAction("Index", "Race");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Race");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
