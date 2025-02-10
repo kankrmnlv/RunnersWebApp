@@ -1,46 +1,52 @@
 ﻿@using RunnersWebApp.ViewModels
 @model EditUserProfileViewModel
 
-<section class="py-5">
+<section class="py-5 bg-light">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-8 col-lg-6">
                 <div class="card shadow-sm border-0 p-4">
-                    <h3 class="text-center mb-4">Edit Profile</h3>
+                    <h3 class="text-center mb-4 fw-bold">Edit Profile</h3>
 
                     <form asp-action="EditUserProfile" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="Id" name="Id" asp-for="Id" />
-                        <div class="form-group">
-                            <label asp-for="Image">Profile picture</label>
-                            <input asp-for="Image" type="file" class="form-control" placeholder="Image" />
-                            <span asp-validation-for="Image" class="text-danger"></span>
+
+                        <!-- Profile Picture Upload -->
+                        <div class="mb-4">
+                            <label asp-for="Image" class="form-label fw-bold">Profile Picture</label>
+                            <input asp-for="Image" type="file" class="form-control" />
+                            <span asp-validation-for="Image" class="text-danger small"></span>
                         </div>
 
+                        <!-- Pace -->
                         <div class="mb-3">
-                            <label class="form-label">Pace (mph)</label>
-                            <input type="number" step="0.1" class="form-control" asp-for="Pace">
+                            <label class="form-label fw-bold">Pace (mph)</label>
+                            <input type="number" step="0.1" class="form-control" asp-for="Pace" placeholder="Enter your pace">
                         </div>
 
+                        <!-- Mileage -->
                         <div class="mb-3">
-                            <label class="form-label">Mileage (miles)</label>
-                            <input type="number" step="0.1" class="form-control" asp-for="Mileage">
+                            <label class="form-label fw-bold">Mileage (miles)</label>
+                            <input type="number" step="0.1" class="form-control" asp-for="Mileage" placeholder="Enter your mileage">
                         </div>
 
+                        <!-- City -->
                         <div class="mb-3">
-                            <label class="form-label">City</label>
-                            <input type="text" class="form-control" asp-for="City">
+                            <label class="form-label fw-bold">City</label>
+                            <input type="text" class="form-control" asp-for="City" placeholder="Enter your city">
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Country</label>
-                            <input type="text" class="form-control" asp-for="Country">
+                        <!-- Country -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Country</label>
+                            <input type="text" class="form-control" asp-for="Country" placeholder="Enter your country">
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary w-100 btn-lg">Save Changes</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
-

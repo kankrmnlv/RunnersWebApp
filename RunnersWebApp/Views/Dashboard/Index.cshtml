@@ -6,28 +6,28 @@
 
 <div class="container py-4">
     <!-- Header Section -->
-    <div class="bg-primary text-white p-4 rounded text-center">
+    <div class="bg-primary text-white p-4 rounded text-center mb-4">
         <h1 class="display-4 fw-normal">User Dashboard</h1>
     </div>
 
     <!-- Action Buttons -->
-    <div class="d-flex flex-wrap justify-content-start gap-3 mt-3">
-        <a class="btn btn-outline-primary" asp-controller="Club" asp-action="Create">+ Create Club</a>
-        <a class="btn btn-outline-primary" asp-controller="Race" asp-action="Create">+ Create Race</a>
-        <a class="btn btn-outline-secondary" asp-controller="Dashboard" asp-action="EditUserProfile">✏️ Edit Profile</a>
+    <div class="d-flex flex-wrap justify-content-start gap-3 mb-4">
+        <a class="btn btn-outline-primary btn-lg" asp-controller="Club" asp-action="Create">+ Create Club</a>
+        <a class="btn btn-outline-primary btn-lg" asp-controller="Race" asp-action="Create">+ Create Race</a>
+        <a class="btn btn-outline-secondary btn-lg" asp-controller="Dashboard" asp-action="EditUserProfile">✏️ Edit Profile</a>
     </div>
 
     <!-- Your Races Section -->
-    <h2 class="mt-5">Your Races</h2>
+    <h2 class="mt-5 mb-4">Your Races</h2>
     <div class="row g-3">
         @foreach (var item in Model.Races)
         {
             <div class="col-md-12">
-                <div class="d-flex border rounded p-3">
+                <div class="d-flex border rounded p-3 align-items-center shadow-sm">
                     <img src="@item.Image" alt="@item.Title" class="rounded me-3" style="width: 150px; height: 100px; object-fit: cover;">
                     <div class="flex-grow-1">
-                        <h5>@item.Title</h5>
-                        <p class="mb-1 text-muted">@item.Description</p>
+                        <h5 class="mb-2">@item.Title</h5>
+                        <p class="mb-2 text-muted">@item.Description</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-sm btn-outline-primary" asp-controller="Race" asp-action="Detail" asp-route-id="@item.Id">View</a>
@@ -46,16 +46,16 @@
     </div>
 
     <!-- Your Clubs Section -->
-    <h2 class="mt-5">Your Clubs</h2>
+    <h2 class="mt-5 mb-4">Your Clubs</h2>
     <div class="row g-3">
         @foreach (var item in Model.Clubs)
         {
             <div class="col-md-6">
-                <div class="card shadow-sm">
+                <div class="card shadow-sm h-100">
                     <img class="card-img-top" src="@item.Image" alt="@item.Title" style="height: 180px; object-fit: cover;">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title">@item.Title</h5>
-                        <p class="card-text">@item.Description</p>
+                        <p class="card-text flex-grow-1">@item.Description</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-sm btn-outline-primary" asp-controller="Club" asp-action="Detail" asp-route-id="@item.Id">View</a>
