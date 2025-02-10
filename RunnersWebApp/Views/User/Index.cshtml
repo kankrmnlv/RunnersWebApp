@@ -1,24 +1,27 @@
 ﻿@using RunnersWebApp.ViewModels
 @model List<RunnersViewModel>
 
-<section class="py-4">
+<section class="py-5">
     <div class="container">
+        <h2 class="text-center mb-4 fw-bold">Meet Our Runners</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach (var user in Model)
             {
                 <div class="col">
-                    <div class="card shadow-sm border-0">
-                        <div class="card-body d-flex align-items-center">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body d-flex align-items-center p-3">
+                            <!-- User Avatar -->
                             <img src="@user.Image" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;" alt="User Avatar">
+                            <!-- User Details -->
                             <div class="flex-grow-1">
-                                <h6 class="mb-1">@user.UserName</h6>
+                                <h6 class="mb-1 fw-bold">@user.UserName</h6>
                                 <p class="small text-muted mb-0">
-                                    @* <i class="icon-location"></i> @user.Location *@
+                                    <i class="fas fa-tachometer-alt me-1"></i>@user.Mileage miles at @user.Pace mph
                                 </p>
-                                <p class="small text-muted">🏃 @user.Mileage mile at @user.Pace mph</p>
                             </div>
+                            <!-- View Profile Button -->
                             <a class="btn btn-outline-primary btn-sm" asp-controller="User" asp-action="Detail" asp-route-id="@user.Id">
-                                View Profile
+                                <i class="fas fa-eye me-1"></i>View
                             </a>
                         </div>
                     </div>
