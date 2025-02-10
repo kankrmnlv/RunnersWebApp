@@ -32,10 +32,7 @@ namespace RunnersWebApp.Controllers
             }
 
             // Fetch other clubs, excluding the current one
-            List<Club> otherClubs = (await _clubInterface.GetAll())
-                .Where(c => c.Id != id)
-                .Take(3) // Limit to 3 clubs
-                .ToList();
+            List<Club> otherClubs = (await _clubInterface.GetAll()).Where(c => c.Id != id).Take(3).ToList();
 
             var viewModel = new ClubDetailViewModel
             {

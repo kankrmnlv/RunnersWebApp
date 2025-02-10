@@ -28,7 +28,20 @@ namespace RunnersWebApp.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             Race race = await _raceInterface.GetByIdAsync(id);
-            return View(race);
+            if(race == null)
+            {
+                return NotFound();
+            }
+
+            List<Race> otherRaces = (await _raceInterface.GetAll()).Where(c => c.Id != id).Take(3).ToList();
+
+            var viewModel = new RaceDetailViewModel
+            {
+                Race = race,
+                OtherRaces = otherRaces
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Create()

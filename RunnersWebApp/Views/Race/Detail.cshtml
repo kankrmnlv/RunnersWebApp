@@ -1,96 +1,81 @@
-﻿@model Race
+﻿@using RunnersWebApp.ViewModels
+@model RaceDetailViewModel
 
 <div class="container mt-5">
     <!-- Title -->
-    <h1 class="text-center mb-4">@Model.Title</h1>
+    <h1 class="text-center mb-4 fw-bold display-4">@Model.Race.Title</h1>
 
     <!-- Main Image -->
-    <div class="text-center">
-        <img src="@Model.Image" class="img-fluid rounded shadow-lg" alt="Project Image">
+    <div class="text-center mb-3">
+        <img src="@Model.Race.Image" class="img-fluid rounded-3 shadow" alt="@Model.Race.Title">
     </div>
 
-    <!-- Project Info (Side-by-Side Layout) -->
-    <div class="row mt-5">
-        <!-- Project Description -->
-        <div class="col-md-6">
-            <h2>Description</h2>
-            <p>@Model.Description</p>
-        </div>
-
-        <!-- Project Details -->
-        <div class="col-md-6">
-            <h2>Details</h2>
-            <table class="table table-bordered">
-                <tr>
-                    <th>City</th>
-                    <td>@Model.Address.City</td>
-                </tr>
-                <tr>
-                    <th>Country</th>
-                    <td>@Model.Address.Country</td>
-                </tr>
-                <tr>
-                    <th>Street</th>
-                    <td>@Model.Address.Street</td>
-                </tr>
-                <tr>
-                    <th>Race Category</th>
-                    <td>@Model.RaceCategory</td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <!-- Related Projects (Horizontal Cards) -->
-    <div class="mt-5">
-        <h2 class="text-center">Similar Projects</h2>
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="card mb-3 shadow-lg">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/300" class="img-fluid rounded-start" alt="Related Project 1">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Project Alpha</h5>
-                                <p class="card-text">An innovative project focusing on cutting-edge technology.</p>
-                                <a href="#" class="btn btn-primary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3 shadow-lg">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/300" class="img-fluid rounded-start" alt="Related Project 2">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Project Beta</h5>
-                                <p class="card-text">A web solution designed for efficiency and scalability.</p>
-                                <a href="#" class="btn btn-primary">View More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3 shadow-lg">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/300" class="img-fluid rounded-start" alt="Related Project 3">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Project Gamma</h5>
-                                <p class="card-text">A unique concept bringing innovation to digital platforms.</p>
-                                <a href="#" class="btn btn-primary">View More</a>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Description and Details -->
+    <div class="row g-4">
+        <!-- Description -->
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2 class="fw-bold mb-3">About the Race</h2>
+                    <p class="lead text-muted">@Model.Race.Description</p>
                 </div>
             </div>
         </div>
+
+        <!-- Details -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <h2 class="fw-bold mb-3">Race Details</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">City</span>
+                            <span>@Model.Race.Address.City</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">Country</span>
+                            <span>@Model.Race.Address.Country</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">Street</span>
+                            <span>@Model.Race.Address.Street</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">Category</span>
+                            <span>@Model.Race.RaceCategory</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Races -->
+    <div class="mt-5">
+        <h2 class="text-center fw-bold mb-4 display-5">Related Races</h2>
+        @if (Model.OtherRaces != null && Model.OtherRaces.Any())
+        {
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var race in Model.OtherRaces)
+                {
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <img src="@race.Image" class="card-img-top" alt="@race.Title" style="height: 200px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">@race.Title</h5>
+                                <p class="card-text text-muted">@race.Description</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a asp-controller="Race" asp-action="Detail" asp-route-id="@race.Id" class="btn btn-primary w-100">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-center text-muted lead">No related races available.</p>
+        }
     </div>
 </div>
