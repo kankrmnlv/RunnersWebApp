@@ -4,34 +4,36 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="container d-flex justify-content-center align-items-start vh-100 pt-5">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
-        <h2 class="text-center mb-4">Login</h2>
-        @if(TempData["Error"] != null){
-            <div class="col-md-12 alert alert-danger">
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 12px;">
+        <h2 class="text-center mb-4 fw-bold">Login</h2>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger text-center" style="border-radius: 8px;">
                 <span>@TempData["Error"]</span>
             </div>
         }
 
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <!-- Email -->
             <div class="mb-3">
-                <label asp-for="EmailAddress" class="form-label">Email</label>
-                <input asp-for="EmailAddress" class="form-control" required placeholder="Enter your email">
+                <label asp-for="EmailAddress" class="form-label fw-bold">Email</label>
+                <input asp-for="EmailAddress" class="form-control border-light shadow-sm" required placeholder="Enter your email" style="border-radius: 8px;">
                 <span asp-validation-for="EmailAddress" class="text-danger"></span>
             </div>
 
             <!-- Password -->
             <div class="mb-3">
-                <label asp-for="Password" class="form-label">Password</label>
-                <input asp-for="Password" class="form-control" required placeholder="Enter your password">
+                <label asp-for="Password" class="form-label fw-bold">Password</label>
+                <input asp-for="Password" type="password" class="form-control border-light shadow-sm" required placeholder="Enter your password" style="border-radius: 8px;">
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
             <!-- Login Button -->
-            <input class="btn btn-primary w-100" type="submit" value="Login"/>
+            <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow-sm" style="border-radius: 8px;">Login</button>
         </form>
     </div>
 </div>
-

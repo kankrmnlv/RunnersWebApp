@@ -26,8 +26,26 @@ namespace RunnersWebApp.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             Club club = await _clubInterface.GetByIdAsync(id);
-            return View(club);
+            if (club == null)
+            {
+                return NotFound();
+            }
+
+            // Fetch other clubs, excluding the current one
+            List<Club> otherClubs = (await _clubInterface.GetAll())
+                .Where(c => c.Id != id)
+                .Take(3) // Limit to 3 clubs
+                .ToList();
+
+            var viewModel = new ClubDetailViewModel
+            {
+                Club = club,
+                OtherClubs = otherClubs
+            };
+
+            return View(viewModel);
         }
+
 
         public IActionResult Create()
         {

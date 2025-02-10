@@ -1,64 +1,54 @@
-﻿@model Club
+﻿@using RunnersWebApp.ViewModels
+@model ClubDetailViewModel
 
-<div class="container mt-5">
+<div class="container mt-4">
     <!-- Title -->
-    <h1 class="text-center mb-4">@Model.Title</h1>
+    <h1 class="text-center fw-bold mb-4">@Model.Club.Title</h1>
 
-    <!-- Main Image -->
+    <!-- Club Image -->
     <div class="text-center">
-        <img src="@Model.Image" class="img-fluid rounded shadow" alt="Project Image">
+        <img src="@Model.Club.Image" class="img-fluid rounded shadow-lg" alt="@Model.Club.Title"
+             style="max-height: 400px; object-fit: cover; border-radius: 12px;">
     </div>
 
-    <!-- Project Description -->
+    <!-- Club Description -->
     <div class="mt-4">
-        <h2>Description</h2>
-        <p>@Model.Description</p>
+        <h2 class="fw-bold">Description</h2>
+        <p class="text-muted">@Model.Club.Description</p>
     </div>
 
-    <!-- Project Details -->
+    <!-- Club Details -->
     <div class="mt-4">
-        <h2>Details</h2>
-        <ul class="list-group">
-            <li class="list-group-item"><strong>City: </strong>@Model.Address.City</li>
-            <li class="list-group-item"><strong>Country: </strong>@Model.Address.Country</li>
-            <li class="list-group-item"><strong>Street: </strong>@Model.Address.Street</li>
-            <li class="list-group-item"><strong>Club Category: </strong>@Model.ClubCategory</li>
+        <h2 class="fw-bold">Details</h2>
+        <ul class="list-group shadow-sm rounded">
+            <li class="list-group-item"><strong>City:</strong> @Model.Club.Address.City</li>
+            <li class="list-group-item"><strong>Country:</strong> @Model.Club.Address.Country</li>
+            <li class="list-group-item"><strong>Street:</strong> @Model.Club.Address.Street</li>
+            <li class="list-group-item"><strong>Club Category:</strong> @Model.Club.ClubCategory</li>
         </ul>
     </div>
 
-    <!-- Related Projects -->
-    <div class="mt-5">
-        <h2>Other Clubs</h2>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <div class="card shadow">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 1">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Project One</h5>
-                        <a href="#" class="btn btn-primary">View Project</a>
+    <!-- Other Clubs Section -->
+    @if (Model.OtherClubs.Any())
+    {
+        <div class="mt-5">
+            <h2 class="fw-bold">Other Clubs</h2>
+            <div class="row mt-3">
+                @foreach (var club in Model.OtherClubs)
+                {
+                    <div class="col-md-4">
+                        <div class="card shadow border-0" style="border-radius: 12px;">
+                            <img src="@club.Image" class="card-img-top" alt="@club.Title"
+                                 style="height: 180px; object-fit: cover;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">@club.Title</h5>
+                                <a asp-controller="Club" asp-action="Detail" asp-route-id="@club.Id"
+                                   class="btn btn-primary fw-bold">View Club</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 2">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Project Two</h5>
-                        <a href="#" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow">
-                    <img src="https://via.placeholder.com/300" class="card-img-top" alt="Related Project 3">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Project Three</h5>
-                        <a href="#" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
+                }
             </div>
         </div>
-    </div>
+    }
 </div>
